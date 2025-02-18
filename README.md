@@ -8,8 +8,10 @@ CRX2RNX
 [![License](https://img.shields.io/badge/license-MPL_2.0-orange?style=for-the-badge&logo=mozilla)](https://github.com/rtk-rs/qc-traits/blob/main/LICENSE)
 
 `crx2rnx` is a small command line utility to decompress
-your CRINEX (Compact RINEX) files into readable RINEX. It is modern
-replacement of the historical tool.
+your CRINEX (Compact RINEX) files into readable RINEX. It aims at becoming
+a modern replacement of the historical tool.
+
+This tool is based on the [GeoRust/RINEX parser](https://github.com/georust/rinex).
 
 ## Licensing
 
