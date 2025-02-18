@@ -1,0 +1,15 @@
+[package]
+name = "crx2rnx"
+version = "2.4.3"
+license = "MPL-2.0"
+authors = ["Guillaume W. Bres <guillaume.bressaix@gmail.com>"]
+description = "RINEX decompression command line utility"
+homepage = "https://github.com/rtk-rs/crx2rnx"
+keywords = ["geo", "compression", "decompression"] 
+categories = ["science", "science::geo", "command-line-interface", "command-line-utilities"]
+edition = "2021"
+readme = "README.md"
+
+[dependencies]
+rinex = "0.17.0-alpha-3"
+clap = { version = "4.4.13", features = ["derive", "color"] }
