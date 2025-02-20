@@ -3,25 +3,6 @@ use cli::Cli;
 use rinex::*;
 use std::path::{Path, PathBuf};
 
-fn workspace(cli: &Cli) -> PathBuf {
-    if let Some(workspace) = cli.workspace() {
-        Path::new(workspace).to_path_buf()
-    } else {
-        Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("..")
-            .join("WORKSPACE")
-    }
-}
-
-fn create_workspace(path: &PathBuf) {
-    std::fs::create_dir_all(path).unwrap_or_else(|_| {
-        panic!(
-            "failed to create workspace \"{}\": permission denied",
-            path.to_string_lossy(),
-        )
-    });
-}
-
 fn input_name(path: &PathBuf) -> String {
     let stem = path
         .file_stem()
@@ -41,34 +22,52 @@ fn input_name(path: &PathBuf) -> String {
 fn main() -> Result<(), rinex::Error> {
     let cli = Cli::new();
 
+    let quiet = cli.quiet();
     let input_path = cli.input_path();
     let input_name = input_name(&input_path);
-    println!("decompressing \"{}\"..", input_name);
+    let input_path_str = input_path.to_string_lossy();
 
-    let workspace_path = workspace(&cli).join(&input_name);
+    let manual_gzip = cli.gzip();
+    let manual_unzip = cli.unzip();
+    let forced_short_v2 = cli.forced_short_v2();
 
-    create_workspace(&workspace_path);
+    let gzip_input = input_path_str.ends_with(".gz");
+    
+    // let output_path = match cli.custom_prefix() {
+    //     Some(prefix) => {
 
-    let filepath = input_path.to_string_lossy();
+    //     },
+    //     None => {
 
-    let mut rinex = Rinex::from_file(&filepath)?;
-    rinex.crnx2rnx_mut(); // convert to RINEX
+    //     },
+    // };
 
-    // if input was gzip'ed: preserve it
-    let suffix = if input_name.ends_with(".gz") {
-        Some(".gz")
-    } else {
-        None
-    };
+    let mut rinex = Rinex::from_file(&input_path_str)?;
+    rinex.crnx2rnx_mut();
 
-    let output_name = match cli.output_name() {
+    let version_major = rinex.header.version.major;
+
+    let short_file_name = forced_short_v2 || version_major < 3;
+
+    let output_name = match cli.custom_name() {
         Some(name) => name.clone(),
-        _ => rinex.standard_filename(cli.matches.get_flag("short"), suffix, None),
+        _ => rinex.standard_filename(short_file_name, None, None),
     };
 
-    let outputpath = format!("{}/{}", workspace_path.to_string_lossy(), output_name);
+    // // if input was gzip'ed: preserve it
+    // let suffix = if input_name.ends_with(".gz") {
+    //     Some(".gz")
+    // } else {
+    //     None
+    // };
 
-    rinex.to_file(&outputpath)?; // dump
-    println!("\"{}\" generated", outputpath.clone());
+    // let outputpath = format!("{}/{}", workspace_path.to_string_lossy(), output_name);
+
+    rinex.to_file(&output_name)?; // dump
+
+    if !quiet {
+        println!("Decompressed {}", output_name);
+    }
+
     Ok(())
 }

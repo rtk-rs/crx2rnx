@@ -27,19 +27,53 @@ cargo install crx2rnx
 
 ## Build from sources
 
-Download the version you are interested in, and build it using cargo:
+Download the version you are interested in:
 
 ```bash
 git clone https://github.com/rtk-rs/crx2rnx
+```
+
+And build it using cargo:
+
+```bash
 cargo build --all-features -r
 ```
 
-## Getting started
+Getting started
+===============
 
 The tool expects one input file that needs to be a valid CRINEX file:
 
 ```bash
-crx2rnx 
+crx2rnx AJAC3550.21D
+Decompressed AJAC3550.21O
+```
+
+By default the tool lets you know what the output file is (`stdout`).  
+
+If that bothers you, simply use `-q` (quiet option): 
+
+```bash
+crx2rnx -q AJAC3550.21D
+```
+
+CRINEX V1/V3
+============
+
+Both revisions are supported by this tool.
+
+The tool preserves the input format by default, so standardized V3 filenames will produce a standardized file name:
+
+```bash
+crx2rnx ACOR00ESP_R_20213550000_01D_30S_MO.crx
+Decompressed ACOR00ESP_R_20213550000_01D_30S_MO.rnx
+```
+
+We have one option that let's you convert a V3 format to V2 directly:
+
+```bash
+crx2rnx -s ACOR00ESP_R_20213550000_01D_30S_MO.crx
+Decompressed ACOR3550.21O
 ```
 
 ## Gzip files
