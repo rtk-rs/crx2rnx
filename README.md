@@ -76,26 +76,25 @@ crx2rnx -s ACOR00ESP_R_20213550000_01D_30S_MO.crx
 Decompressed ACOR3550.21O
 ```
 
+## Custom output name
+
+You can specify a custom output location with `--prefix [directory]`, 
+and you can specify a filename yourself with `-o [filename]`.
+
+```bash
+crx2rnx --prefix /tmp -s ACOR00ESP_R_20213550000_01D_30S_MO.crx
+Decompressed /tmp/ACOR3550.21O
+```
+
 ## Gzip files
 
-The tool supports both I/O gzip compressed data. You can decompress
-your Gzip CRINEX files natively:
+The tool supports gzip compressed CRINEX files natively, but can only generate
+plain RINEX at the moment:
 
 ```bash
-crx2rnx 
+crx2rnx ESBC00DNK_R_20201770000_01D_30S_MO.crx.gz
+Decompressed ESBC00DNK_R_20201770000_01D_30S_MO.rnx
 ```
-
-The tool preserves the input format, by default, this will generate a new Gzip'ed file.  
-You can use `--unzip` to specify you want to gzip decompress at the same time.  
-
-You can use this tool to Gzip compress at the same time, in this example we 
-decompress a "plain" CRINEX into a gzip compressed RINEX:
-
-```bash
-
-```
-
-Finally, when defining a custom RINEX name, you have two options
 
 ## Licensing
 

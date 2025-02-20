@@ -27,8 +27,8 @@ fn main() -> Result<(), rinex::Error> {
     let input_name = input_name(&input_path);
     let input_path_str = input_path.to_string_lossy();
 
-    let manual_gzip = cli.gzip();
-    let manual_unzip = cli.unzip();
+    // let manual_gzip = cli.gzip();
+    // let manual_unzip = cli.unzip();
     let forced_short_v2 = cli.forced_short_v2();
 
     let gzip_input = input_path_str.ends_with(".gz");
