@@ -26,9 +26,7 @@ impl Cli {
                         Arg::new("quiet")
                             .short('q')
                             .action(ArgAction::SetTrue)
-                            .help(
-                                "Make the tool quiet"
-                            ),
+                            .help("Make the tool quiet"),
                     )
                     .arg(
                         Arg::new("short")
@@ -39,7 +37,8 @@ impl Cli {
                             .long_help(
                                 "Synthesize a short RINEX file (V2 convention)
 in case your input is V3 like. Otherwise, this has no effect.
-This tool will preserve the input format by default.")
+This tool will preserve the input format by default.",
+                            ),
                     )
                     .arg(
                         Arg::new("output")
@@ -56,7 +55,7 @@ This tool will preserve the input format by default.")
                             .long("prefix")
                             .required(false)
                             .value_name("directory")
-                            .help("Define custom output location (folder) that must exist.")
+                            .help("Define custom output location (folder) that must exist."),
                     )
                     .get_matches()
             },
@@ -67,12 +66,6 @@ This tool will preserve the input format by default.")
     }
     pub fn forced_short_v2(&self) -> bool {
         self.matches.get_flag("short")
-    }
-    pub fn gzip(&self) -> bool {
-        self.matches.get_flag("gzip")
-    }
-    pub fn unzip(&self) -> bool {
-        self.matches.get_flag("unzip")
     }
     pub fn input_path(&self) -> PathBuf {
         Path::new(self.matches.get_one::<String>("filepath").unwrap()).to_path_buf()

@@ -78,12 +78,19 @@ Decompressed ACOR3550.21O
 
 ## Custom output name
 
-You can specify a custom output location with `--prefix [directory]`, 
-and you can specify a filename yourself with `-o [filename]`.
+You can specify a custom output location with `--prefix [directory]`: 
 
 ```bash
 crx2rnx --prefix /tmp -s ACOR00ESP_R_20213550000_01D_30S_MO.crx
 Decompressed /tmp/ACOR3550.21O
+```
+
+You can specify a filename yourself with `-o [filename]`,
+which overrides any filename determination logic:
+
+```bash
+crx2rnx --prefix -o TEST.txt -s ACOR00ESP_R_20213550000_01D_30S_MO.crx
+Decompressed TEST.txt
 ```
 
 ## Gzip files
