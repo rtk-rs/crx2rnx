@@ -89,7 +89,7 @@ You can specify a filename yourself with `-o [filename]`,
 which overrides any filename determination logic:
 
 ```bash
-crx2rnx --prefix -o TEST.txt -s ACOR00ESP_R_20213550000_01D_30S_MO.crx
+crx2rnx -o TEST.txt ACOR00ESP_R_20213550000_01D_30S_MO.crx
 Decompressed TEST.txt
 ```
 
