@@ -43,7 +43,6 @@ This tool will preserve the input format by default.",
                     .arg(
                         Arg::new("output")
                             .short('o')
-                            .long("output")
                             .required(false)
                             .value_name("filename")
                             .action(ArgAction::Set)
