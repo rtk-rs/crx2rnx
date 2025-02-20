@@ -13,6 +13,27 @@ a modern replacement of the historical tool.
 
 This tool is based on the [GeoRust/RINEX parser](https://github.com/georust/rinex).
 
+## Download the tool
+
+You can download the latest version from [the release portal](https://github.com/rtk-rs/crx2rnx/releases)
+
+## Install from Cargo
+
+You can directly install the tool from Cargo with internet access:
+
+```bash
+cargo install crx2rnx
+```
+
+## Build from sources
+
+Download the version you are interested in, and build it using cargo:
+
+```bash
+git clone https://github.com/rtk-rs/crx2rnx
+cargo build --all-features -r
+```
+
 ## Licensing
 
 This application is part of the [RTK-rs framework](https://github.com/rtk-rs) which
