@@ -25,7 +25,7 @@ You can directly install the tool from Cargo with internet access:
 cargo install crx2rnx
 ```
 
-## Build from sources
+## Build from sources
 
 Download the version you are interested in, and build it using cargo:
 
@@ -33,6 +33,35 @@ Download the version you are interested in, and build it using cargo:
 git clone https://github.com/rtk-rs/crx2rnx
 cargo build --all-features -r
 ```
+
+## Getting started
+
+The tool expects one input file that needs to be a valid CRINEX file:
+
+```bash
+crx2rnx 
+```
+
+## Gzip files
+
+The tool supports both I/O gzip compressed data. You can decompress
+your Gzip CRINEX files natively:
+
+```bash
+crx2rnx 
+```
+
+The tool preserves the input format, by default, this will generate a new Gzip'ed file.  
+You can use `--unzip` to specify you want to gzip decompress at the same time.  
+
+You can use this tool to Gzip compress at the same time, in this example we 
+decompress a "plain" CRINEX into a gzip compressed RINEX:
+
+```bash
+
+```
+
+Finally, when defining a custom RINEX name, you have two options
 
 ## Licensing
 

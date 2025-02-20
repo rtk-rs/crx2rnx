@@ -13,41 +13,38 @@ impl Cli {
                 Command::new("crx2rnx")
                     .author("Guillaume W. Bres <guillaume.bressaix@gmail.com>")
                     .version(env!("CARGO_PKG_VERSION"))
-                    .about("Compact RINEX decompression tool")
+                    .about("CRINEX files decompression tool")
                     .arg_required_else_help(true)
                     .color(ColorChoice::Always)
                     .arg(
                         Arg::new("filepath")
-                            .short('f')
-                            .long("fp")
                             .help("Input RINEX file")
+                            .value_name("[filepath]")
                             .required(true),
                     )
                     .arg(
                         Arg::new("short")
                             .short('s')
-                            .long("short")
                             .action(ArgAction::SetTrue)
                             .conflicts_with("output")
                             .help(
-                                "Prefer shortened filename convention.
-Otherwise, we default to modern (V3+) long filenames.
-Both will not work well if your input does not follow standard conventions at all.",
+                                "Synthesize a short RINEX file (V2 convention).
+Otherwise, this tool will prefer modern (long filenames) when that may apply."
                             ),
                     )
                     .arg(
                         Arg::new("output")
                             .short('o')
                             .long("output")
+                            .value_name("[filename]")
                             .action(ArgAction::Set)
                             .conflicts_with_all(["short"])
-                            .help("Custom output file name"),
+                            .help("Define custom output name instead of standard convention."),
                     )
                     .arg(
-                        Arg::new("workspace")
-                            .short('w')
-                            .long("workspace")
-                            .help("Define custom workspace location"),
+                        Arg::new("prefix")
+                            .long("prefix")
+                            .help("Define custom output location (folder) that must exist.")
                     )
                     .get_matches()
             },
