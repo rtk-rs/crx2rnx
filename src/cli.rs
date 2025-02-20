@@ -13,53 +13,66 @@ impl Cli {
                 Command::new("crx2rnx")
                     .author("Guillaume W. Bres <guillaume.bressaix@gmail.com>")
                     .version(env!("CARGO_PKG_VERSION"))
-                    .about("Compact RINEX decompression tool")
+                    .about("CRINEX files decompression tool")
                     .arg_required_else_help(true)
                     .color(ColorChoice::Always)
                     .arg(
                         Arg::new("filepath")
-                            .short('f')
-                            .long("fp")
                             .help("Input RINEX file")
+                            .value_name("filepath")
                             .required(true),
+                    )
+                    .arg(
+                        Arg::new("quiet")
+                            .short('q')
+                            .action(ArgAction::SetTrue)
+                            .help("Make the tool quiet"),
                     )
                     .arg(
                         Arg::new("short")
                             .short('s')
-                            .long("short")
                             .action(ArgAction::SetTrue)
                             .conflicts_with("output")
-                            .help(
-                                "Prefer shortened filename convention.
-Otherwise, we default to modern (V3+) long filenames.
-Both will not work well if your input does not follow standard conventions at all.",
+                            .help("Prefer V2 (short) filename")
+                            .long_help(
+                                "Synthesize a short RINEX file (V2 convention)
+in case your input is V3 like. Otherwise, this has no effect.
+This tool will preserve the input format by default.",
                             ),
                     )
                     .arg(
                         Arg::new("output")
                             .short('o')
-                            .long("output")
+                            .required(false)
+                            .value_name("filename")
                             .action(ArgAction::Set)
                             .conflicts_with_all(["short"])
-                            .help("Custom output file name"),
+                            .help("Define custom output name instead of standard convention."),
                     )
                     .arg(
-                        Arg::new("workspace")
-                            .short('w')
-                            .long("workspace")
-                            .help("Define custom workspace location"),
+                        Arg::new("prefix")
+                            .long("prefix")
+                            .required(false)
+                            .value_name("directory")
+                            .help("Define custom output location (folder) that must exist."),
                     )
                     .get_matches()
             },
         }
     }
+    pub fn quiet(&self) -> bool {
+        self.matches.get_flag("quiet")
+    }
+    pub fn forced_short_v2(&self) -> bool {
+        self.matches.get_flag("short")
+    }
     pub fn input_path(&self) -> PathBuf {
         Path::new(self.matches.get_one::<String>("filepath").unwrap()).to_path_buf()
     }
-    pub fn output_name(&self) -> Option<&String> {
+    pub fn custom_name(&self) -> Option<&String> {
         self.matches.get_one::<String>("output")
     }
-    pub fn workspace(&self) -> Option<&String> {
-        self.matches.get_one::<String>("workspace")
+    pub fn custom_prefix(&self) -> Option<&String> {
+        self.matches.get_one::<String>("prefix")
     }
 }
