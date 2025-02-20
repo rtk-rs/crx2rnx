@@ -151,12 +151,12 @@ jobs:
         release_name: ${{ github.ref_name }}
 
     - name: Download x86_64-unknown-linux-gnu
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-x86_64-unknown-linux-gnu.tar.gz
     
     - name: Download x86_64-unknown-linux-gnu (cksum)
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-x86_64-unknown-linux-gnu.tar.gz.sha256
         
@@ -181,12 +181,12 @@ jobs:
         asset_content_type: application/gzip
         
     - name: Download x86_64-apple-darwin
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-x86_64-apple-darwin.tar.gz
     
     - name: Download x86_64-apple-darwin (cksum)
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-x86_64-apple-darwin.tar.gz.sha256
         
@@ -211,12 +211,12 @@ jobs:
         asset_content_type: application/gzip
     
     - name: Download aarch64-apple-darwin
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-aarch64-apple-darwin.tar.gz
     
     - name: Download aarch64-apple-darwin (cksum)
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-aarch64-apple-darwin.tar.gz.sha256
         
@@ -241,12 +241,12 @@ jobs:
         asset_content_type: application/gzip
 
     - name: Download x86_64-pc-windows-msvc
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-x86_64-pc-windows-msvc.zip
     
     - name: Download x86_64-pc-windows-msvc (cksum)
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with: 
         name: crx2rnx-${{ github.ref_name }}-x86_64-pc-windows-msvc.zip.sha256
         
