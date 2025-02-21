@@ -13,4 +13,4 @@ readme = "README.md"
 
 [dependencies]
 clap = { version = "4.5", features = ["derive", "color"] }
-rinex = { git = "https://github.com/georust/rinex", branch = "rinex-backend", features = ["flate2"] }
+rinex = { git = "https://github.com/georust/rinex", branch = "main", features = ["flate2"] }
