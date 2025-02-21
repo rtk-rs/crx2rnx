@@ -40,8 +40,7 @@ fn main() {
         Rinex::from_file(&input_path)
     };
 
-    let mut rinex = rinex
-        .unwrap_or_else(|e| panic!("RINEX parsing error: {}", e));
+    let mut rinex = rinex.unwrap_or_else(|e| panic!("RINEX parsing error: {}", e));
 
     rinex.crnx2rnx_mut();
 
@@ -59,7 +58,8 @@ fn main() {
         None => output_name.to_string(),
     };
 
-    rinex.to_file(&output_path)
+    rinex
+        .to_file(&output_path)
         .unwrap_or_else(|e| panic!("RINEX formatting error: {}", e));
 
     if !quiet {
